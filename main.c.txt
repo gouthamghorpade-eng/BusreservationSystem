@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include "reservation.h"
+
+int main() {
+    int choice;
+    do {
+        printf("\n--- Bus Reservation System ---\n");
+        printf("1. Display Seating Layout\n");
+        printf("2. Book a Seat\n");
+        printf("3. Cancel a Seat\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1: displaySeats(); break;
+            case 2: bookSeat(); break;
+            case 3: cancelSeat(); break;
+            case 4: printf("Exiting...\n"); break;
+            default: printf("Invalid choice!\n");
+        }
+    } while (choice != 4);
+
+    return 0;
+}

@@ -1,0 +1,69 @@
+#include <stdio.h>
+#include <string.h>
+#include "reservation.h"
+
+int seats[ROWS][COLS] = {0};  
+Passenger passengers[ROWS*COLS];
+int passengerCount = 0;
+
+void displaySeats() {
+    printf("\nSeating Layout (0 = empty, 1 = booked):\n");
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            printf("%d ", ((seats + i) + j));  // pointer arithmetic
+        }
+        printf("\n");
+    }
+}
+
+void bookSeat() {
+    int r, c, typeChoice;
+    printf("\nEnter Row (0-%d): ", ROWS-1);
+    scanf("%d", &r);
+    printf("Enter Column (0-%d): ", COLS-1);
+    scanf("%d", &c);
+
+    if (r >= 0 && r < ROWS && c >= 0 && c < COLS && seats[r][c] == 0) {
+        seats[r][c] = 1;
+
+        Passenger p;
+        printf("Enter Passenger Name: ");
+        scanf("%s", p.name);
+        printf("Enter Age: ");
+        scanf("%d", &p.age);
+        printf("Choose Bus Type (0=AC, 1=NON_AC, 2=SLEEPER): ");
+        scanf("%d", &typeChoice);
+p.type = (BusType)typeChoice;
+        p.seatRow = r;
+        p.seatCol = c;
+
+        passengers[passengerCount++] = p;
+        printf(" Seat booked successfully for %s!\n", p.name);
+    } else {
+        printf(" Seat not available!\n");
+    }
+}
+
+void cancelSeat() {
+    int r, c;
+    printf("\nEnter Row of Seat to Cancel: ");
+    scanf("%d", &r);
+    printf("Enter Column of Seat to Cancel: ");
+    scanf("%d", &c);
+
+    if (r >= 0 && r < ROWS && c >= 0 && c < COLS && seats[r][c] == 1) {
+        seats[r][c] = 0;
+        for (int i = 0; i < passengerCount; i++) {
+            if (passengers[i].seatRow == r && passengers[i].seatCol == c) {
+                printf(" Booking cancelled for %s.\n", passengers[i].name);
+                for (int j = i; j < passengerCount - 1; j++) {
+                    passengers[j] = passengers[j+1];
+                }
+                passengerCount--;
+                break;
+            }
+        }
+    } else {
+        printf(" No booking found for this seat.\n");
+    }
+}
