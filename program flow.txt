@@ -1,0 +1,4 @@
+1. Display Seating Layout
+2. Book a Seat
+3. Cancel a Seat
+4. Exit

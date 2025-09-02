@@ -1,0 +1,5 @@
+This project is a simple simulation of a **bus seat reservation system** using c
+it allows user to:
+-View the seat layout
+-Book seats
+-Cancel bookings

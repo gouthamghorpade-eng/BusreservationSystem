@@ -1,0 +1,5 @@
+- Uses *2D arrays* to represent seat layout
+- Implements *pointers* for seat navigation
+- Supports seat booking & cancellation
+- Stores *passenger details* using structures
+- Uses *enums* for bus type (AC, NON-AC, SLEEPER)
